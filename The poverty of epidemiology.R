@@ -372,13 +372,13 @@ for (mu in mean_gt_range) {
   }
 }
 
-ggplot(advantage_estimates1 %>% filter(sd_gt <= 3), aes(x = estimate)) +
+ggplot(advantage_estimates1, aes(x = estimate)) +
   geom_histogram(aes(y = ..density..), colour = "black", fill = "white") +
   geom_density(alpha = .2, fill = "#FF6666") +
   theme_bw() +
   ggtitle(
     "Distribution of transmissibility advantage estimates with a model similar to that used by Gaymard et al.",
-    subtitle = "(R of historical lineage = {0.9, 1, 1.1}, mean of generation spanning [3,7] by increment of 0.1, standard deviation spanning [1.5,3] by increment of 0.1)"
+    subtitle = "(R of historical lineage = {0.9, 1, 1.1}, mean of generation time spanning [3,7] by increment of 0.1, standard deviation spanning [1.5,3] by increment of 0.1)"
     ) +
   scale_x_continuous(
     labels = scales::percent
@@ -604,7 +604,10 @@ ggplot(advantage_estimates2, aes(x = estimate)) +
   geom_histogram(aes(y = ..density..), colour = "black", fill = "white") +
   geom_density(alpha = .2, fill = "#FF6666") +
   theme_bw() +
-  ggtitle("Distribution of transmissibility advantage estimates") +
+  ggtitle(
+    "Distribution of transmissibility advantage estimates",
+    subtitle = "(mean of generation time spanning [3,7] by increment of 0.1, standard deviation spanning [1.5,3] by increment of 0.1)"
+    ) +
   scale_x_continuous(
     labels = scales::percent
   ) +
@@ -612,7 +615,7 @@ ggplot(advantage_estimates2, aes(x = estimate)) +
   xlab("Estimate") +
   theme(
     plot.title = element_text(hjust = 0.5),
-    legend.position = "bottom"
+    plot.subtitle = element_text(hjust = 0.5)
   ) +
   ggsave(
     "Figures/Epidemiological Modeling/Model 2/Distribution of transmissibility advantage estimates - Model 2.png",
